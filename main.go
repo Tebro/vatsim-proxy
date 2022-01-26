@@ -20,7 +20,7 @@ func getData() ([]byte, error) {
 }
 
 func main() {
-	var data []byte
+	var dataCache []byte
 
 	go func() {
 		for {
@@ -29,17 +29,16 @@ func main() {
 			if err != nil {
 				fmt.Printf("Failed to get data: %v\n", err)
 			} else {
-				data = result
+				dataCache = result
 				fmt.Println("Data updated")
 			}
 			time.Sleep(time.Second * 60)
-
 		}
 	}()
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Add("Content-Type", "application/json")
-		fmt.Fprintf(w, "%s", data)
+		fmt.Fprintf(w, "%s", dataCache)
 	})
 	http.ListenAndServe(":3000", nil)
 

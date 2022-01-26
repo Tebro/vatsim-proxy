@@ -38,8 +38,9 @@ func main() {
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Add("Content-Type", "application/json")
+		w.Header().Add("Access-Control-Allow-Origin", "*")
 		fmt.Fprintf(w, "%s", dataCache)
 	})
-	http.ListenAndServe(":3000", nil)
+	http.ListenAndServe(":3001", nil)
 
 }

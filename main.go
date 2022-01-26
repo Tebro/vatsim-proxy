@@ -30,8 +30,8 @@ func main() {
         fmt.Printf("Failed to get data: %v\n", err)
       } else {
         data = result
+        fmt.Println("Data updated")
       }
-      fmt.Println("Data updated")
       time.Sleep(time.Second * 60)
 
     }
